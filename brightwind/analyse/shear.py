@@ -1106,7 +1106,11 @@ class Shear:
         cvg = None
         if isinstance(wspds.index, pd.DatetimeIndex):
             if maximise_data is False:
-                cvg = coverage(wspds[wspds > min_speed].dropna(), period='1AS').sum()[1]
+                try:
+                    cvg = coverage(wspds[wspds > min_speed].dropna(), period='1AS').sum()[1]
+                except IndexError:
+                    raise IndexError('There is not enough data to perform this calculation.'
+                                     ' Data must exist for at least measurement heights at each timestamp.')
             else:
                 _wspds = wspds[wspds > min_speed]
                 count = _wspds.count(axis=1)
