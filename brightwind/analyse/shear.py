@@ -1110,7 +1110,7 @@ class Shear:
                     cvg = coverage(wspds[wspds > min_speed].dropna(), period='1AS').sum()[1]
                 except IndexError:
                     raise IndexError('There is not enough data to perform this calculation.'
-                                     ' Data must exist for at least measurement heights at each timestamp.')
+                                     ' Data must exist for at least 2 measurement heights at each timestamp.')
             else:
                 _wspds = wspds[wspds > min_speed]
                 count = _wspds.count(axis=1)
